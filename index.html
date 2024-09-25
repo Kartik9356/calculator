@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.4/math.min.js"></script>
+    <style>
+      body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    font-family: 'Arial', sans-serif;
+}
+
+main {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.input {
+    margin-bottom: 20px;
+}
+
+#display {
+    width: 96%;
+    padding: 10px;
+    font-size: 1.5em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: right;
+    background-color: #e9e9e9;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+button {
+    padding: 20px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button.number {
+    background-color: #f9f9f9;
+}
+
+button.operition {
+    background-color: #ffcc00;
+}
+
+button:hover {
+    background-color: #ddd;
+}
+
+button.operition:hover {
+    background-color: #ffb700;
+}
+
+button:active {
+    background-color: #ccc;
+}
+
+button.operition:active {
+    background-color: #e6a800;
+}
+<style/>
+</head>
+
+<body>
+    <main>
+        <div class="input">
+            <input id="display" readonly type="text">
+        </div>
+        <div class="buttons">
+            <button onclick="apppend('+')" class="operition">+</button>
+            <button onclick="apppend('7')" class=" number">7</button>
+            <button onclick="apppend('8')" class=" number">8</button>
+            <button onclick="apppend('9')" class=" number">9</button>
+            <button onclick="apppend('*')" class=" operition">*</button>
+            <button onclick="apppend('4')" class=" number">4</button>
+            <button onclick="apppend('5')" class=" number">5</button>
+            <button onclick="apppend('6')" class=" number">6</button>
+            <button onclick="apppend('/')" class=" operition">/</button>
+            <button onclick="apppend('1')" class=" number">1</button>
+            <button onclick="apppend('2')" class=" number">2</button>
+            <button onclick="apppend('3')" class=" number">3</button>
+            <button onclick="apppend('-')" class=" operition">-</button>
+            <button onclick="apppend('.')" class=" number">.</button>
+            <button onclick="apppend('0')" class=" number">0</button>
+            <button onclick="calc()" class="operition">=</button>
+            <button onclick="clearDisplay()"class=" operition">c</button>
+            <button onclick="back()"class=" operition"><--</button>
+        </div>
+    </main>
+
+    <script>
+        let display = document.querySelector("#display");
+
+        function apppend(x) {
+            
+            let lastchar = display.value.slice(-1);
+            if (x == '+' || x == '-' || x == '*' || x == '/') {
+                if (display.value.slice(-1) == '+' || display.value.slice(-1) == '-' || display.value.slice(-1) == '*' || display.value.slice(-1) == '/') {
+                    display.value = display.value.slice(0, -1)+x;
+                }
+                else {
+                    display.value += x;
+                }
+            }
+            else {
+                display.value += x;
+            }
+        }
+
+        function back(){
+            display.value = display.value.slice(0, -1)
+        }
+
+
+        function calc(){
+            display.value;
+            let x = math.evaluate(display.value);
+            display.value=x;
+            return x;
+        }
+
+
+        // display.value.slice(-1);
+        // var display.value = display.value.replace(display.value.slice(-1),x)
+
+
+
+        function clearDisplay() {
+            display.value = "";
+        }
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === '1' || event.key === '2' || event.key === '3' || event.key === '9' || event.key === '4' || event.key === '5' || event.key === '6' || event.key === '7' || event.key === '8' || event.key == "." || event.key === '+' || event.key === '-' || event.key === '*' || event.key === '/' || event.key === '%') {
+                apppend(event.key)
+            }
+            if (event.key == "Enter" || event.key === '=') {
+                calc();
+            }
+
+            if (event.key === 'c') {
+                clearDisplay()
+            }
+            if (event.key === "Backspace") {
+                back()
+            }
+            // display.value = event.key;
+        });
+    
+    </script>
+</body>
+
+</html>
