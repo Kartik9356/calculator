@@ -5,78 +5,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.4/math.min.js"></script>
     <style>
         body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f0f0f0;
-    font-family: 'Arial', sans-serif;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+background-color: #f0f0f0;
+font-family: 'Arial', sans-serif;
 }
 
 main {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+background-color: #fff;
+padding: 30px;
+border-radius: 10px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .input {
-    margin-bottom: 20px;
+margin-bottom: 20px;
 }
 
-#display {
-    width: 96%;
-    padding: 10px;
-    font-size: 1.5em;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    text-align: right;
-    background-color: #e9e9e9;
+#display ,#display2 {
+width: 96%;
+height: 30px;
+padding: 10px;
+font-size: 1.5em;
+border: 1px solid #ccc;
+border-radius: 5px;
+text-align: right;
+background-color: #e9e9e9;
+}
+#display2{
+    margin-bottom: 25px;
 }
 
 .buttons {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 10px;
 }
 
 button {
-    padding: 20px;
-    font-size: 1.2em;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+padding: 20px;
+font-size: 1.2em;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+transition: background-color 0.3s;
 }
 
 button.number {
-    background-color: #f9f9f9;
+background-color: #f9f9f9;
 }
 
 button.operition {
-    background-color: #ffcc00;
+background-color: #ffcc00;
 }
 
 button:hover {
-    background-color: #ddd;
+background-color: #ddd;
 }
 
 button.operition:hover {
-    background-color: #ffb700;
+background-color: #ffb700;
 }
 
 button:active {
-    background-color: #ccc;
+background-color: #ccc;
 }
 
 button.operition:active {
-    background-color: #e6a800;
+background-color: #e6a800;
 }
 
-    </style>
+    </style>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.4/math.min.js"></script>
 </head>
 
 <body>
@@ -84,79 +88,187 @@ button.operition:active {
         <div class="input">
             <input id="display" readonly type="text">
         </div>
+        <div id="display2"></div>
+
         <div class="buttons">
-            <button onclick="apppend('+')" class="operition">+</button>
+            <button onclick="apppend('+')" class="operition">
+                <img src="icons\5.png" height="20px" width="20px" alt="">
+            </button>
             <button onclick="apppend('7')" class=" number">7</button>
             <button onclick="apppend('8')" class=" number">8</button>
             <button onclick="apppend('9')" class=" number">9</button>
-            <button onclick="apppend('*')" class=" operition">*</button>
+            <button onclick="apppend('*')" class=" operition">
+                <img src="icons\4.png" height="20px" width="20px" alt="">
+            </button>
             <button onclick="apppend('4')" class=" number">4</button>
             <button onclick="apppend('5')" class=" number">5</button>
             <button onclick="apppend('6')" class=" number">6</button>
-            <button onclick="apppend('/')" class=" operition">/</button>
+            <button onclick="apppend('/')" class=" operition">
+                <img src="icons\1.png" height="20px" width="20px" alt="">
+            </button>
             <button onclick="apppend('1')" class=" number">1</button>
             <button onclick="apppend('2')" class=" number">2</button>
             <button onclick="apppend('3')" class=" number">3</button>
-            <button onclick="apppend('-')" class=" operition">-</button>
+            <button onclick="apppend('-')" class=" operition">
+                <img src="icons\9.png" height="20px" width="20px" alt="">
+            </button>
             <button onclick="apppend('.')" class=" number">.</button>
             <button onclick="apppend('0')" class=" number">0</button>
-            <button onclick="calc()" class="operition">=</button>
-            <button onclick="clearDisplay()"class=" operition">c</button>
-            <button onclick="back()"class=" operition"><--</button>
+            <button onclick="calc()" class="operition">
+                <img src="icons\2.png" height="20px" width="20px" alt="">
+            </button>
+            <button onclick="clearDisplay()" class=" operition"><strong>C</strong></button>
+            <button onclick="back()" class=" operition">
+                <img src="icons\3.png" height="20px" width="20px" alt="">
+            </button>
         </div>
     </main>
 
     <script>
+        // document.getElementById('display2')
         let display = document.querySelector("#display");
+        let display2 = document.querySelector('#display2');
+        let sample = "";
+
+        function linear() {
+            display.value;
+            let x = math.evaluate(display.value);
+            display.value = x;
+            sample = x;
+            return x;
+        }
 
         function apppend(x) {
-            
-            let lastchar = display.value.slice(-1);
-            if (x == '+' || x == '-' || x == '*' || x == '/') {
-                if (display.value.slice(-1) == '+' || display.value.slice(-1) == '-' || display.value.slice(-1) == '*' || display.value.slice(-1) == '/') {
-                    display.value = display.value.slice(0, -1)+x;
+            if (display.value === "" && (x == '+' || x == '*' || x == '/')) {
+                display.value = "";
+                sample = "";
+            } else {
+
+                let lastchar = display.value.slice(-1);
+                if (x == '+' || x == '-' || x == '*' || x == '/') {
+                    if (lastchar == '+' || lastchar == '-' || lastchar == '*' || lastchar == '/') {
+
+                        display.value = display.value.slice(0, -1) + x;
+                        sample = sample.slice(0, -1) + x;
+
+                        // code for display 2
+                       
+                        document.getElementById('display2').innerHTML = document.getElementById('display2').innerHTML.slice(0, display2.innerHTML.length - 59);
+                        if (x == '+') {
+                            document.getElementById('display2').innerHTML +=  '<img src="icons\\5.png" height="17px" width="17px" alt="">';
+                        }
+                        if (x == '-') {
+                            document.getElementById('display2').innerHTML +=  '<img src="icons\\9.png" height="17px" width="17px" alt="">';
+                        }
+                        if (x == '/') {
+                            document.getElementById('display2').innerHTML +=  '<img src="icons\\1.png" height="17px" width="17px" alt="">';
+                        }
+                        if (x == '*') {
+                            document.getElementById('display2').innerHTML +=  '<img src="icons\\4.png" height="17px" width="17px" alt="">';
+                        }
+                    }
+                    else {
+                        display.value += x;
+                        sample += x;
+                        // code for display 2
+                        if (x == '+') {
+                            document.getElementById('display2').innerHTML += '<img src="icons\\5.png" height="17px" width="17px" alt="">';
+                        }
+                        if (x == '-') {
+                            document.getElementById('display2').innerHTML += '<img src="icons\\9.png" height="17px" width="17px" alt="">';
+                        }
+                        if (x == '/') {
+                            document.getElementById('display2').innerHTML += '<img src="icons\\1.png" height="17px" width="17px" alt="">';
+                        }
+                        if (x == '*') {
+                            document.getElementById('display2').innerHTML += '<img src="icons\\4.png" height="17px" width="17px" alt="">';
+                        }
+                    }
                 }
                 else {
                     display.value += x;
+                    sample += x;
+                    // code for display 2
+                    document.getElementById('display2').innerHTML += `<span>${x}</span>`;
                 }
             }
-            else {
-                display.value += x;
-            }
+            console.log(sample);
+            return display.value;
         }
 
-        function back(){
+        function back() {
+            let lastchar = display.value.slice(-1);
             display.value = display.value.slice(0, -1)
+            sample = display.value;
+            console.log(sample);
+            //code for display 2
+            if (lastchar == '+' || lastchar == '-' || lastchar == '*' || lastchar == '/') {
+                document.getElementById('display2').innerHTML = document.getElementById('display2').innerHTML.slice(0, display2.innerHTML.length - 59);
+            }else{
+                document.getElementById('display2').innerHTML = document.getElementById('display2').innerHTML.slice(0, display2.innerHTML.length - 14);
+            }
+            return display.value;
+
         }
 
 
-        function calc(){
-            display.value;
-            let x = math.evaluate(display.value);
-            display.value=x;
-            return x;
+        function calc() {
+            display.value = math.evaluate(display.value);
+            sample = math.evaluate(sample);
+            console.log(sample);
+            //code for display 2
+            document.getElementById('display2').innerHTML = "";
+            num=sample;
+            let text = num.toString();
+            for(i=0;i<text.length;i++){
+                document.getElementById('display2').innerHTML += `<span>${text[i]}</span>`;
+            }
+            return display.value;
+            
         }
+     
         function clearDisplay() {
             display.value = "";
+            sample = "";
+            console.log(sample);
+            //code for display 2
+            document.getElementById('display2').innerHTML = sample;
+            return display.value;
         }
 
+
+
+
         document.addEventListener('keydown', function (event) {
-            if (event.key === '1' || event.key === '2' || event.key === '3' || event.key === '9' || event.key === '4' || event.key === '5' || event.key === '6' || event.key === '7' || event.key === '8' || event.key == "." || event.key === '+' || event.key === '-' || event.key === '*' || event.key === '/' || event.key === '%') {
-                apppend(event.key)
+            if (event.key === '1' || event.key === '2' || event.key === '3' || event.key === '9' || event.key === '4' || event.key === '5' || event.key === '6' || event.key === '7' || event.key === '8' || event.key === '.') {
+                sample = apppend(event.key)
+                console.log(sample);
+            }
+            if (event.key == "." || event.key === '+' || event.key === '-' || event.key === '*' || event.key === '/' || event.key === '%') {
+                // uncomment following function to make 'linear' calculator
+                // calc();
+                sample = apppend(event.key)
+                console.log(sample);
+
             }
             if (event.key == "Enter" || event.key === '=') {
-                calc();
+                sample = calc();
+                console.log(sample);
+
             }
 
             if (event.key === 'c') {
-                clearDisplay()
+                sample = clearDisplay();
+                console.log(sample);
+
             }
             if (event.key === "Backspace") {
-                back()
+                sample = back();
+                console.log(sample);
+
             }
         });
-    
+       
     </script>
 </body>
-
 </html>
